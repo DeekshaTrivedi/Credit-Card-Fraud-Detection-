@@ -125,7 +125,7 @@ An example mask used to detect suspicious transfers:
     pip install -r requirements.txt
    ```
 3. Start Jupyter Notebook:
-```bash
-jupyter notebook
-```
+   ```bash
+   jupyter notebook
+   ```
 4. Open the analysis notebook and run all cells in sequence.
