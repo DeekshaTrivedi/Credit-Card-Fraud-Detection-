@@ -55,3 +55,77 @@ Transaction values were highly skewed, so log transformations were applied:
 
 ```python
 np.log1p(df["amount"])
+```
+
+This produced distributions that were easier to interpret and visualize.
+
+## Fraud Distribution
+
+- isFraud = 1: 8,213 cases
+- isFraud = 0: 6,354,407 cases
+
+Fraud rate is approximately 0.12%, showing strong class imbalance.
+
+## Transaction Type Analysis
+
+Fraud occurs exclusively in:
+
+- TRANSFER
+
+- CASH_OUT
+
+##Correlation Analysis
+
+A correlation matrix was generated to study relationships among numerical features:
+```python
+df[cols].corr()
+
+```
+Key observations:
+- No strong linear correlation exists with fraud
+- Financially paired features show expected high correlations
+- Fraud behavior is non-linear, making engineered features important
+
+## Feature Engineering
+
+To capture financial inconsistencies, the following features were created:
+```python
+df["balanceDiffOrig"] = df["oldbalanceOrg"] - df["newbalanceOrig"] - df["amount"]
+df["balanceDiffDest"] = df["newbalanceDest"] - df["oldbalanceDest"] - df["amount"]
+```
+These help expose:
+- Broken balance logic
+- Unexpected negative or zero balances
+- Suspicious transaction patterns
+
+##Fraud Pattern Insights
+
+- Important findings from the analysis:
+- Fraud sender accounts rarely repeat
+- Fraud receiver accounts often appear hundreds of times
+- Many fraudulent transactions leave senders with newbalanceOrig == 0
+- A large group of suspicious cases show sender balance draining unexpectedly
+- Engineered features successfully highlight hidden irregularities
+
+An example mask used to detect suspicious transfers:
+```python
+(df["oldbalanceOrg"] > 0) &
+(df["newbalanceOrig"] == 0) &
+(df["type"].isin(["TRANSFER", "CASH_OUT"]))
+```
+## Running the Notebook
+
+1. Clone the Repository
+   ```bash
+   git clone <your-repo-link>
+
+   ```
+2. Install Dependencies
+   ```bash
+    pip install -r requirements.txt
+   ```
+3. Start Jupyter Notebook:
+```bash
+jupyter notebook
+```
+4. Open the analysis notebook and run all cells in sequence.
