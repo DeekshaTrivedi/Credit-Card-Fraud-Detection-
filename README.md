@@ -74,7 +74,7 @@ Fraud occurs exclusively in:
 
 - CASH_OUT
 
-##Correlation Analysis
+## Correlation Analysis
 
 A correlation matrix was generated to study relationships among numerical features:
 ```python
@@ -98,7 +98,7 @@ These help expose:
 - Unexpected negative or zero balances
 - Suspicious transaction patterns
 
-##Fraud Pattern Insights
+## Fraud Pattern Insights
 
 - Important findings from the analysis:
 - Fraud sender accounts rarely repeat
@@ -114,7 +114,7 @@ An example mask used to detect suspicious transfers:
 (df["type"].isin(["TRANSFER", "CASH_OUT"]))
 ```
 
-##Model Training
+## Model Training
 
 A full machine-learning pipeline was created using:
 
@@ -135,39 +135,38 @@ This .pkl file contains:
 - the trained classifier
 This allows seamless use inside the Streamlit app.
 
-##Streamlit Fraud Detection App
+## Streamlit Fraud Detection App
 A simple web interface was built using Streamlit to allow users to input transaction details and receive a fraud prediction.
-##
-##Running the Streamlit App
-###Install dependencies:
+## Running the Streamlit App
+### Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-###Run the app:
+### Run the app:
 ```bash
 streamlit run fraud_detection.py
 ```
-###Required File
+### Required File
 Ensure the model file exists:
 ```bash
 fraud_detection_model.pkl
 ```
 Streamlit loads this pipeline automatically.
 
-###The app will open in your browser.
+### The app will open in your browser.
 Input transaction details, and the model will predict whether it is fraudulent.
 
 
-###Clone the Repository
+### Clone the Repository
 ```bash
 git clone <your-repo-link>
 ```
-###Install Dependencies
+### Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-###Launch Jupyter
+### Launch Jupyter
 ```bash
 jupyter notebook
 ```
