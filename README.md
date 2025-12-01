@@ -159,7 +159,7 @@ Input transaction details, and the model will predict whether it is fraudulent.
 
 ### Clone the Repository
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/DeekshaTrivedi/Credit-Card-Fraud-Detection-.git
 ```
 ### Install Dependencies
 ```bash
