@@ -113,19 +113,63 @@ An example mask used to detect suspicious transfers:
 (df["newbalanceOrig"] == 0) &
 (df["type"].isin(["TRANSFER", "CASH_OUT"]))
 ```
-## Running the Notebook
 
-1. Clone the Repository
-   ```bash
-   git clone <your-repo-link>
+##Model Training
 
-   ```
-2. Install Dependencies
-   ```bash
-    pip install -r requirements.txt
-   ```
-3. Start Jupyter Notebook:
-   ```bash
-   jupyter notebook
-   ```
-4. Open the analysis notebook and run all cells in sequence.
+A full machine-learning pipeline was created using:
+
+- ColumnTransformer
+- StandardScaler
+- OneHotEncoder
+- LogisticRegression / RandomForest / XGBoost (depending on experiment)
+
+The final trained pipeline was saved as:
+```python
+joblib.dump(pipeline, "fraud_detection_model.pkl")
+```
+This .pkl file contains:
+
+- preprocessing steps
+- encoding
+- scaling
+- the trained classifier
+This allows seamless use inside the Streamlit app.
+
+##Streamlit Fraud Detection App
+A simple web interface was built using Streamlit to allow users to input transaction details and receive a fraud prediction.
+##
+##Running the Streamlit App
+###Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+###Run the app:
+```bash
+streamlit run fraud_detection.py
+```
+###Required File
+Ensure the model file exists:
+```bash
+fraud_detection_model.pkl
+```
+Streamlit loads this pipeline automatically.
+
+###The app will open in your browser.
+Input transaction details, and the model will predict whether it is fraudulent.
+
+
+###Clone the Repository
+```bash
+git clone <your-repo-link>
+```
+###Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+###Launch Jupyter
+```bash
+jupyter notebook
+```
+
+Run all cells in the notebook sequentially.
